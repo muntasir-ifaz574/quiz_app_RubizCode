@@ -42,7 +42,9 @@ class _ResultsScreenState extends State<ResultsScreen> {
                     timestamp: DateTime.now(),
                   );
                   await StorageService.saveScore(newScore);
-                  Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+                  if (mounted){
+                    Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+                  }
                 }
               },
               child: const Text('Save Score'),
