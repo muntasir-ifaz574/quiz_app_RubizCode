@@ -34,8 +34,9 @@ class QuizProvider extends ChangeNotifier {
   }
 
   void selectAnswer(int index) {
-    selectedAnswers[currentIndex] = index;
-    notifyListeners();
+    selectedAnswers[currentIndex] = index; // This should update the current question's answer
+    notifyListeners(); // This triggers UI updates
+    print("Selected answer $index for question $currentIndex"); // Add debug print
   }
 
   void nextQuestion() {
@@ -63,9 +64,33 @@ class QuizProvider extends ChangeNotifier {
       }
     });
   }
-
   int calculateScore() {
-    return calculateScoreHelper(questions, selectedAnswers);
+    int score = 0;
+    print("--- Calculating Score ---");
+    print("Total questions: ${questions.length}");
+
+    for (int i = 0; i < questions.length; i++) {
+      final question = questions[i];
+      final selectedAnswer = selectedAnswers[i];
+      final correctAnswer = question.answerIndex;
+
+      print("\nQuestion ${i + 1}:");
+      print("Selected answer index: $selectedAnswer");
+      print("Correct answer index: $correctAnswer");
+      print("Options: ${question.options.join(', ')}");
+
+      if (selectedAnswer != null && selectedAnswer == correctAnswer) {
+        score++;
+        print("✅ Correct!");
+      } else if (selectedAnswer == null) {
+        print("⚠️ No answer selected");
+      } else {
+        print("❌ Incorrect");
+      }
+    }
+
+    print("\nFinal Score: $score / ${questions.length}");
+    return score;
   }
 
   void resetQuiz() {

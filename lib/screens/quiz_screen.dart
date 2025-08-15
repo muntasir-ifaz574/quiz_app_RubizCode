@@ -22,7 +22,6 @@ class _QuizScreenState extends State<QuizScreen>
   @override
   void initState() {
     super.initState();
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -73,8 +72,9 @@ class _QuizScreenState extends State<QuizScreen>
         }
         if (provider.isQuizComplete) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pushReplacementNamed(context, resultsRoute);
-            provider.resetQuiz();
+            Navigator.pushNamed(context, resultsRoute).then((_) {
+              provider.resetQuiz();
+            });
           });
           return const SizedBox.shrink();
         }
@@ -115,7 +115,6 @@ class _QuizScreenState extends State<QuizScreen>
                         separatorBuilder: (context, index) =>
                         const SizedBox(height: 8),
                         itemBuilder: (context, index) {
-                          // Staggered animation for options
                           final optionAnimation = CurvedAnimation(
                             parent: _animationController,
                             curve: Interval(
@@ -137,9 +136,7 @@ class _QuizScreenState extends State<QuizScreen>
                                 isSelected: provider
                                     .selectedAnswers[provider.currentIndex] ==
                                     index,
-                                isLocked: provider
-                                    .selectedAnswers[provider.currentIndex] !=
-                                    null,
+                                isLocked: false,
                                 onTap: () => provider.selectAnswer(index),
                               ),
                             ),
@@ -165,8 +162,8 @@ class _QuizScreenState extends State<QuizScreen>
                       child: FadeTransition(
                         opacity: _fadeAnimation,
                         child: ElevatedButton(
-                          onPressed: provider
-                              .selectedAnswers[provider.currentIndex] !=
+                          onPressed: provider.selectedAnswers[
+                          provider.currentIndex] !=
                               null
                               ? () => _nextQuestion(provider)
                               : null,
