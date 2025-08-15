@@ -1,4 +1,3 @@
-// lib/screens/results_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/score_model.dart';
@@ -35,22 +34,21 @@ class _ResultsScreenState extends State<ResultsScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                if (_nameController.text.isNotEmpty) {
-                  final currentContext = context;
-                  final newScore = Score(
-                    playerName: _nameController.text,
-                    score: score,
-                    timestamp: DateTime.now(),
-                  );
-                  await StorageService.saveScore(newScore);
+                if (_nameController.text.isEmpty) return;
+                final newScore = Score(
+                  playerName: _nameController.text,
+                  score: score,
+                  timestamp: DateTime.now(),
+                );
 
-                  if (mounted) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      currentContext,
-                      homeRoute,
-                          (route) => false,
-                    );
-                  }
+                await StorageService.saveScore(newScore);
+
+                if (mounted) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    homeRoute,
+                        (route) => false,
+                  );
                 }
               },
               child: const Text('Save Score'),
