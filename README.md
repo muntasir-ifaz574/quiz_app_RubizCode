@@ -39,13 +39,39 @@ Developed as part of the **Senior Flutter Developer** technical assignment for *
 
 ```
 lib/
- ├── main.dart              # Entry point
- ├── models/                # Data models (Question, ScoreEntry)
- ├── providers/             # State management providers
- ├── screens/               # Home, Quiz, Results, Leaderboard screens
- ├── widgets/               # Reusable UI widgets
-assets/
- └── questions.json         # Local quiz data
+├── main.dart                      # App entry point, initializes and runs the app
+├── application.dart               # Root app configuration, themes, and providers
+│
+├── models/                        # Data models 
+│   ├── question_model.dart        # Defines Question structure 
+│   └── score_model.dart           # Defines ScoreEntry
+│
+├── providers/                     # State management (Provider)
+│   └── quiz_provider.dart         # Manages quiz state, user progress, and scoring
+│
+├── screens/                       # App screens (pages)
+│   ├── category_screen.dart       # Screen to select quiz categories
+│   ├── home_screen.dart           # Main landing screen with navigation
+│   ├── leaderboard_screen.dart    # Displays top scores from storage
+│   ├── quiz_screen.dart           # Interactive quiz UI with questions
+│   └── results_screen.dart        # Shows final score
+│
+├── services/                      # Business logic and data handling
+│   ├── qustion_service.dart       # Quation
+│   └── storage_service.dart       # Local storage (sqflite) for scores
+│
+├── utils/                         # Utilities and helpers
+│   ├── constants.dart             # App constants (screen path, colors, API keys, asset paths)
+│   └── helpers.dart               # Helper functions (e.g., formatting, calculations)
+│
+└── widgets/                       # Reusable UI components
+    ├── answer_option.dart         # Custom answer button widget
+    ├── latex_text.dart            # Renders LaTeX/math expressions
+    ├── progress_indicator.dart    # Quiz progress bar/counter
+    └── score_title.dart           # Styled score display widget
+│
+test/                              # Automated tests
+    ├── quiz_test.dart             # Unit tests for quiz logic
 ```
 
 ---
@@ -98,7 +124,7 @@ The app follows a **Provider-based state management architecture**:
 
 ---
 
-## ✅ Implemented
+## Implemented
 
 * All **MVP features** from assignment requirements:
 
