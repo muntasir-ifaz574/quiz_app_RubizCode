@@ -36,19 +36,25 @@ class _ResultsScreenState extends State<ResultsScreen> {
             ElevatedButton(
               onPressed: () async {
                 if (_nameController.text.isNotEmpty) {
+                  final currentContext = context;
                   final newScore = Score(
                     playerName: _nameController.text,
                     score: score,
                     timestamp: DateTime.now(),
                   );
                   await StorageService.saveScore(newScore);
-                  if (mounted){
-                    Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+
+                  if (mounted) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      currentContext,
+                      homeRoute,
+                          (route) => false,
+                    );
                   }
                 }
               },
               child: const Text('Save Score'),
-            ),
+            )
           ],
         ),
       ),
