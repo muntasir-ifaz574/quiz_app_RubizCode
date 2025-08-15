@@ -14,6 +14,15 @@ Developed as part of the **Senior Flutter Developer** technical assignment for *
 * **Results Screen** – Shows final score, lets user enter player name, saves to leaderboard
 * **Leaderboard Screen** – Displays sorted scores (highest first), persistent storage
 
+### Bonus Features Implemented
+
+* **Timed Questions** – 15-second countdown per question (toggleable)
+* **Animations** –  Smooth transitions between questions
+* **Category Selection** – Filter questions by topic (e.g., Math, Geography)
+* **Dark Mode** – System-aware theme switching
+* **Unit Tests** – Score calculation and critical logic
+* **GitHub Actions CI** – Auto-runs flutter analyze and flutter test
+
 ### Implementation Details
 
 * Works entirely **offline** (local assets & SQLite)
@@ -80,13 +89,13 @@ test/                              # Automated tests
 
 ### 1 Prerequisites
 
-* [Flutter SDK](https://flutter.dev/docs/get-started/install) (Stable channel, version `X.Y.Z` used for this project)
+* [Flutter SDK](https://flutter.dev/docs/get-started/install) (Stable channel, version `3.32.0` used for this project)
 * Android Studio / VS Code with Flutter plugin
 
 ### 2 Installation
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/muntasir-ifaz574/quiz_app_RubizCode.git
 cd <project-folder>
 flutter pub get
 ```
@@ -146,12 +155,16 @@ The app follows a **Provider-based state management architecture**:
   {
     "question": "What is the capital of France?",
     "options": ["Paris", "London", "Rome", "Berlin"],
-    "answer_index": 0
+    "answer_index": 0,
+    "category": "Geography", 
+    "time_seconds": 15
   },
   {
     "question": "Evaluate the integral: $$ \\int_0^1 x^2 dx $$",
     "options": ["1/2", "1/3", "2/3", "1"],
-    "answer_index": 1
+    "answer_index": 1,
+    "category": "Math",
+    "time_seconds": 15
   }
 ]
 ```
@@ -186,13 +199,12 @@ jobs:
 
 ---
 
-## Demo (Optional)
+## Demo
 
 
 
 ---
 
 **Author:** Muntasir Efaz
-**License:** MIT
 
 ---
