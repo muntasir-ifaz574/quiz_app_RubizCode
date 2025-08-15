@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => QuizProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Quiz App',
         theme: ThemeData.light(useMaterial3: true),
         darkTheme: ThemeData.dark(useMaterial3: true),
