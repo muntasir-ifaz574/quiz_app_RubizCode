@@ -202,8 +202,8 @@ jobs:
 
 ## Demo
 
-**APK:** https://drive.google.com/file/d/1U9or3ZmTukXsMIsM5xl2CMqVZP_gucpX/view?usp=drive_link
-**Demo Video:** https://drive.google.com/file/d/1_g-Ck-R2N3ECvbEtK9IDkP9_wV4W6sht/view?usp=drive_link
+* **APK:** https://drive.google.com/file/d/1U9or3ZmTukXsMIsM5xl2CMqVZP_gucpX/view?usp=drive_link
+* **Demo Video:** https://drive.google.com/file/d/1_g-Ck-R2N3ECvbEtK9IDkP9_wV4W6sht/view?usp=drive_link
 
 
 ---
