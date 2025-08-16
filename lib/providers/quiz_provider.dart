@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import '../models/question_model.dart';
 import '../services/qustion_service.dart';
-import '../utils/helpers.dart';
 
 class QuizProvider extends ChangeNotifier {
   List<Question> questions = [];
@@ -34,9 +33,8 @@ class QuizProvider extends ChangeNotifier {
   }
 
   void selectAnswer(int index) {
-    selectedAnswers[currentIndex] = index; // This should update the current question's answer
-    notifyListeners(); // This triggers UI updates
-    print("Selected answer $index for question $currentIndex"); // Add debug print
+    selectedAnswers[currentIndex] = index;
+    notifyListeners();
   }
 
   void nextQuestion() {
@@ -66,30 +64,16 @@ class QuizProvider extends ChangeNotifier {
   }
   int calculateScore() {
     int score = 0;
-    print("--- Calculating Score ---");
-    print("Total questions: ${questions.length}");
 
     for (int i = 0; i < questions.length; i++) {
       final question = questions[i];
       final selectedAnswer = selectedAnswers[i];
       final correctAnswer = question.answerIndex;
 
-      print("\nQuestion ${i + 1}:");
-      print("Selected answer index: $selectedAnswer");
-      print("Correct answer index: $correctAnswer");
-      print("Options: ${question.options.join(', ')}");
-
       if (selectedAnswer != null && selectedAnswer == correctAnswer) {
         score++;
-        print("✅ Correct!");
-      } else if (selectedAnswer == null) {
-        print("⚠️ No answer selected");
-      } else {
-        print("❌ Incorrect");
       }
     }
-
-    print("\nFinal Score: $score / ${questions.length}");
     return score;
   }
 

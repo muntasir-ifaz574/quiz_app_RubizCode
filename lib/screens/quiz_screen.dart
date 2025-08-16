@@ -18,7 +18,7 @@ class _QuizScreenState extends State<QuizScreen>
   late AnimationController _animationController;
   late Animation<Offset> _slideAnimation;
   late Animation<double> _fadeAnimation;
-  bool _hasNavigatedToResults = false; // Flag to prevent multiple navigations
+  bool _hasNavigatedToResults = false;
 
   @override
   void initState() {
@@ -48,25 +48,45 @@ class _QuizScreenState extends State<QuizScreen>
     });
   }
 
-  void _nextQuestion(QuizProvider provider) {
-    // Always call nextQuestion first to update the state
-    provider.nextQuestion();
+  // void _nextQuestion(QuizProvider provider) {
+  //   provider.nextQuestion();
+  //   if (provider.isQuizComplete && !_hasNavigatedToResults) {
+  //     _hasNavigatedToResults = true;
+  //     Navigator.pushNamed(context, resultsRoute).then((_) {
+  //       provider.resetQuiz();
+  //       setState(() {
+  //         _hasNavigatedToResults = false;
+  //         _animationController.forward();
+  //       });
+  //     });
+  //   } else if (!provider.isQuizComplete) {
+  //     _animationController.reverse().then((_) {
+  //       _animationController.forward();
+  //       provider.startTimer();
+  //     });
+  //   }
+  // }
 
+
+  void _nextQuestion(QuizProvider provider) {
+    provider.nextQuestion();
     if (provider.isQuizComplete && !_hasNavigatedToResults) {
-      // Navigate to results if quiz is complete
       _hasNavigatedToResults = true;
       Navigator.pushNamed(context, resultsRoute).then((_) {
-        provider.resetQuiz();
-        setState(() {
-          _hasNavigatedToResults = false; // Reset for future quizzes
-          _animationController.forward(); // Prepare for new quiz
-        });
+        if (mounted) {
+          provider.resetQuiz();
+          setState(() {
+            _hasNavigatedToResults = false;
+            _animationController.forward();
+          });
+        }
       });
     } else if (!provider.isQuizComplete) {
-      // Only animate if quiz is not complete
       _animationController.reverse().then((_) {
-        _animationController.forward();
-        provider.startTimer();
+        if (mounted) {
+          _animationController.forward();
+          provider.startTimer();
+        }
       });
     }
   }
@@ -85,7 +105,6 @@ class _QuizScreenState extends State<QuizScreen>
           return const Center(child: CircularProgressIndicator());
         }
 
-        // Avoid rendering UI if navigation is pending
         if (provider.isQuizComplete && _hasNavigatedToResults) {
           return const SizedBox.shrink();
         }
