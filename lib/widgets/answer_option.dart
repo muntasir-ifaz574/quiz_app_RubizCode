@@ -29,8 +29,8 @@ class AnswerOption extends StatelessWidget {
       onTap: isLocked ? null : onTap,
       child: Container(
         constraints: const BoxConstraints(
-          minHeight: 50, // Ensure enough height for LaTeX content
-          maxWidth: double.infinity, // Allow full width
+          minHeight: 50,
+          maxWidth: double.infinity,
         ),
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(12),
