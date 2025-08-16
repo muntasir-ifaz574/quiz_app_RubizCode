@@ -94,13 +94,14 @@ class _ResultsScreenState extends State<ResultsScreen> {
 
                     await StorageService.saveScore(newScore);
 
-                    if (mounted) {
+                    // if (mounted) {
+                    if (!mounted) return;
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         homeRoute,
                             (route) => false,
                       );
-                    }
+                    // }
                   },
                   child: const Text(
                     'Save Score',
