@@ -188,10 +188,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2.13.0
         with:
-          flutter-version: 'stable'
+          flutter-version: '3.32.0'
+          architecture: x64
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
