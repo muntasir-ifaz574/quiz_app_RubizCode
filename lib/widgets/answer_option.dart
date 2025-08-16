@@ -19,22 +19,32 @@ class AnswerOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isSelected
+        ? Colors.blue
+        : isDarkMode
+        ? Colors.black
+        : Colors.white;
     return GestureDetector(
       onTap: isLocked ? null : onTap,
       child: Container(
         constraints: const BoxConstraints(
-          maxHeight: 100,
+          minHeight: 50, // Ensure enough height for LaTeX content
+          maxWidth: double.infinity, // Allow full width
         ),
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.blue : Colors.black,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: Color(0xFF1573F1)
-          )
+            color: const Color(0xFF1573F1),
+          ),
         ),
-        child: LatexText(tex: option, fontSize: 16),
+        child: LatexText(
+          tex: option,
+          fontSize: 16,
+        ),
       ),
     );
   }
